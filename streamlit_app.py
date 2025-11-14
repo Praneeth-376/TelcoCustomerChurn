@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import cloudpickle
+
+with open("full_churn_model.pkl", "wb") as f:
+    cloudpickle.dump(pipeline, f)
 
 st.title("📊 Telecom Customer Churn Prediction (All Features)")
 
