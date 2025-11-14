@@ -1,15 +1,12 @@
 import streamlit as st
 import pandas as pd
-import joblib
 import cloudpickle
 
-with open("full_churn_model.pkl", "wb") as f:
-    cloudpickle.dump(pipeline, f)
+# Load full pipeline model
+with open("full_churn_model.pkl", "rb") as f:
+    model = cloudpickle.load(f)
 
 st.title("📊 Telecom Customer Churn Prediction (All Features)")
-
-# Load pipeline
-model = joblib.load("full_churn_model.pkl")
 
 st.write("Enter customer details to predict churn:")
 
@@ -37,7 +34,7 @@ payment = st.selectbox("PaymentMethod", [
     "Electronic check", "Mailed check", "Bank transfer (automatic)", "Credit card (automatic)"
 ])
 
-# Create input DataFrame
+# Create the DataFrame for prediction
 raw_data = pd.DataFrame({
     "gender": [gender],
     "SeniorCitizen": [senior],
